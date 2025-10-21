@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mas de ti - Remolacha❤️‍🩹</title>
+  <!-- CSS separado: ./style.css -->
+  <link rel="stylesheet" href="../css/extra 1.css">
+</head>
+<body>
+  <!-- Navegación fija superior (idéntica a la otra página) -->
+  <header class="nav" id="nav" role="banner">
+    <div class="logo" aria-hidden="false">
+      <div class="heart" aria-hidden="true">♥</div>
+      Romántica
+    </div>
+    <nav role="navigation" aria-label="Menú principal">
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../html/extra 1.html">Mas de ti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="main">
+    <!-- Encabezado de la nueva página -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="hero-inner">
+        <h1 id="page-title">Descubre nuestros rincones</h1>
+        <p id="page-desc">
+          Esta página muestra proyectos especiales, recuerdos y rincones románticos seleccionados. 
+          Explora, abre cada tarjeta para ver más detalles y navega a páginas específicas con el botón.
+        </p>
+      </div>
+    </section>
+
+    <!-- Fila de 3 recuadros (cards) -->
+    <section id="galeria" class="cards" aria-label="Galería de tres elementos">
+      <div class="card-grid" id="cardGrid">
+        <!-- Card 1 -->
+        <article class="card" role="article" tabindex="0" aria-labelledby="c1-title">
+          <div class="card-media">
+            <img src="https://www.billboard.com/wp-content/uploads/2024/10/olivia-rodrigo-guts-tour-intuit-2024-billboard-1548.jpg" alt="Atardecer en la playa" loading="lazy" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 id="c1-title">Música</h3>
+            <p class="card-excerpt">Canciones o artistas que le gusta a ella</p>
+            <div class="card-actions">
+              <a class="btn link-btn" href="../html/musica.html" role="button" aria-label="Ir a Atardeceres">Ver</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="card" role="article" tabindex="0" aria-labelledby="c2-title">
+          <div class="card-media">
+            <img src="../img/chucho.jpg" alt="Cena romántica" loading="lazy" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 id="c2-title">Mascotas</h3>
+            <p class="card-excerpt">Mascotas que forman una parte feliz de su vida</p>
+            <div class="card-actions">
+              <a class="btn link-btn" href="../html/mascotas.html" role="button" aria-label="Ir a Cenas">Ver</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card" role="article" tabindex="0" aria-labelledby="c3-title">
+          <div class="card-media">
+            <img src="https://st.depositphotos.com/1158045/3877/i/450/depositphotos_38775619-stock-photo-fountain-pen.jpg" alt="Paseos nocturnos" loading="lazy" class="card-img">
+          </div>
+          <div class="card-body">
+            <h3 id="c3-title">Sentimientos</h3>
+            <p class="card-excerpt">Lo que deseo y siento por ella</p>
+            <div class="card-actions">
+              <a class="btn link-btn" href="../html/Sentimientos.html" role="button" aria-label="Ir a Paseos">Ver</a>
+            </div>
+          </div>
+        </article>
+
+
+
+
+      </div>
+    </section>
+
+
+  <!-- Footer (idéntico al anterior) -->
+  <footer class="site-footer" id="contacto" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>Romántica</strong>
+        <p>Hecho con cariño para ti.</p>
+      </div>
+      <div class="footer-right">
+        <p>© <span id="year"></span> Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts inline (interactividad avanzada) -->
+  <script>
+    (function(){
+      // NAV: efecto al hacer scroll (misma lógica que la otra página)
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        const sc = window.scrollY || document.documentElement.scrollTop;
+        if (sc > 20) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+      });
+
+      // Footer año dinámico
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Accesibilidad: permitir abrir tarjeta con Enter/Space desde teclado
+      const cards = Array.from(document.querySelectorAll('.card'));
+      cards.forEach((card, i) => {
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleExpand(card);
+          }
+        });
+        // click/tap abre la tarjeta (efecto expandible)
+        card.addEventListener('click', (e) => {
+          // evitar activar al hacer click en el link interno
+          if (e.target.closest('a')) return;
+          toggleExpand(card);
+        });
+        // hover visual (mejora UX) - solo para puntero con hover
+        card.addEventListener('mouseenter', () => card.classList.add('hover'));
+        card.addEventListener('mouseleave', () => card.classList.remove('hover'));
+      });
+
+      // Toggle expand: muestra más información dentro de la tarjeta (implementar estilos en CSS)
+      function toggleExpand(card) {
+        const isExpanded = card.classList.toggle('expanded');
+        // aria
+        card.setAttribute('aria-expanded', String(isExpanded));
+        // si expandimos, desplazar al centro para foco
+        if (isExpanded) {
+          card.scrollIntoView({behavior:'smooth', block:'center'});
+        }
+      }
+
+      // Controles: filtro y expandir todas
+      const filterSelect = document.getElementById('filter');
+      const expandAllBtn = document.getElementById('expandAll');
+
+      if(filterSelect) {
+        filterSelect.addEventListener('change', () => {
+          const val = filterSelect.value;
+          filterCards(val);
+        });
+      }
+
+      function filterCards(val) {
+        cards.forEach((card, idx) => {
+          // mapping simple basado en título; puedes usar data-attributes si prefieres
+          const title = (card.querySelector('h3') || {}).textContent || '';
+          const map = {
+            atardeceres: 'Atardeceres',
+            cenas: 'Cenas',
+            paseos: 'Paseos'
+          };
+          if(val === 'all' || title === map[val]) {
+            card.classList.remove('hidden');
+            card.setAttribute('aria-hidden', 'false');
+          } else {
+            card.classList.add('hidden');
+            card.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }
+
+      if(expandAllBtn) {
+        expandAllBtn.addEventListener('click', () => {
+          const expanded = expandAllBtn.getAttribute('aria-pressed') === 'true';
+          const willExpand = !expanded;
+          expandAllBtn.setAttribute('aria-pressed', String(willExpand));
+          expandAllBtn.textContent = willExpand ? 'Contraer todas' : 'Expandir todas';
+          cards.forEach(c => {
+            c.classList.toggle('expanded', willExpand);
+            c.setAttribute('aria-expanded', String(willExpand));
+          });
+        });
+      }
+
+      // Mejora de teclado: navegación con flechas entre tarjetas
+      document.addEventListener('keydown', (e) => {
+        const active = document.activeElement;
+        if (!active || !active.classList.contains('card')) return;
+        const idx = cards.indexOf(active);
+        if (e.key === 'ArrowRight') {
+          const next = cards[(idx + 1) % cards.length];
+          next.focus();
+          e.preventDefault();
+        }
+        if (e.key === 'ArrowLeft') {
+          const prev = cards[(idx - 1 + cards.length) % cards.length];
+          prev.focus();
+          e.preventDefault();
+        }
+      });
+
+      // API: permitir agregar tarjetas dinámicamente desde JS
+      window.romanticaGallery = {
+        addCard: function({imgSrc, imgAlt, title, excerpt, href}) {
+          const grid = document.getElementById('cardGrid');
+          if(!grid) return;
+          const article = document.createElement('article');
+          article.className = 'card';
+          article.tabIndex = 0;
+          article.setAttribute('role','article');
+          article.innerHTML = `
+            <div class="card-media">
+              <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(imgAlt||'')}" loading="lazy" class="card-img">
+            </div>
+            <div class="card-body">
+              <h3>${escapeHtml(title)}</h3>
+              <p class="card-excerpt">${escapeHtml(excerpt)}</p>
+              <div class="card-actions">
+                <a class="btn link-btn" href="${escapeHtml(href||'#')}" role="button">Ver página</a>
+              </div>
+            </div>
+          `;
+          grid.appendChild(article);
+          // re-run minimal init for new card
+          article.addEventListener('click', (e) => { if(e.target.closest('a')) return; toggleExpand(article); });
+          article.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(article); } });
+          cards.push(article);
+        }
+      };
+
+      // Escape helper
+      function escapeHtml(str) {
+        if (!str) return '';
+        return String(str).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]);
+      }
+
+      
+
+      // Prevent focus outline removal for keyboard users but keep mouse pleasantness
+      (function improveFocus() {
+        let usingKeyboard = false;
+        window.addEventListener('keydown', (e) => {
+          if (e.key === 'Tab') usingKeyboard = true;
+        });
+        window.addEventListener('mousedown', () => { usingKeyboard = false; });
+        document.addEventListener('focusin', (e) => {
+          if (!usingKeyboard && e.target) e.target.classList.add('mouse-focus');
+        });
+        document.addEventListener('focusout', (e) => {
+          if (e.target) e.target.classList.remove('mouse-focus');
+        });
+      })();
+
+    })();
+  </script>
+</body>
+</html>
+```

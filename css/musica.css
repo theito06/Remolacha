@@ -1,0 +1,222 @@
+/* gallery.css - CSS independiente para gallery.html (usa mismo esquema de colores, menú y footer) */
+
+/* Reset ligero y base */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #3b2b2b; background: linear-gradient(180deg,#fff7fb 0%, #fff0f6 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+/* Navegación fija superior (copiada del original) */
+header.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  z-index: 1200;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,105,180,0.08);
+}
+.logo { display:flex; align-items:center; gap:10px; font-weight:700; color:#b32d6b; font-size:20px; user-select:none; }
+.logo .heart { width:36px; height:36px; display:inline-grid; place-items:center; background: linear-gradient(135deg,#ffb3d1,#ff6fa3); color:white; border-radius:50%; font-size:18px; box-shadow:0 6px 18px rgba(255,105,180,0.18); }
+nav ul { list-style:none; display:flex; gap:18px; align-items:center; }
+nav a { text-decoration:none; color:#6b2a4a; padding:8px 12px; border-radius:10px; font-weight:600; transition: background 150ms, color 150ms; }
+nav a:hover, nav a:focus { background: rgba(179,45,107,0.08); color:#a21f57; outline: none; }
+
+/* Contenedor principal */
+main.container { padding-top: 92px; max-width: 1100px; margin: 0 auto; }
+
+/* Intro */
+.page-title { color:#9d2e67; font-size:28px; margin-bottom:8px; }
+.lead { color:#533040; max-width:820px; line-height:1.5; margin-bottom:12px; }
+
+/* Estructura de fichas (lista vertical con imágenes destacadas) */
+.places {
+  margin: 28px 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* Cada ficha */
+.place {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 18px;
+  align-items: start;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,245,249,0.7));
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 22px 60px rgba(179,45,107,0.06);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.place:focus { transform: translateY(-4px); box-shadow: 0 30px 80px rgba(179,45,107,0.10); outline: none; }
+
+/* Media (imagen y caption) */
+.place-media {
+  margin: 0;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+  min-height: 220px;
+  background: linear-gradient(180deg,#fff0f6,#fff8fb);
+  box-shadow: 0 12px 36px rgba(179,45,107,0.06);
+}
+.place-media img { width:100%; height:100%; object-fit: cover; display:block; transition: transform 500ms ease; }
+.place-media:hover img { transform: scale(1.03); }
+
+.place-caption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  color: rgb(50, 50, 50);
+  text-shadow: 0 8px 22px rgba(0,0,0,0.28);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.place-caption strong { font-size:18px; }
+.place-sub { font-size:13px; opacity:0.95; }
+
+/* Cuerpo de la ficha */
+.place-body { padding: 6px 4px; }
+.place-text { color:#533040; line-height:1.6; margin-bottom:10px; }
+.place-actions { display:flex; gap:10px; margin-top:6px; }
+
+/* Botones */
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(180deg,#ff8fbf,#d94b86);
+  box-shadow: 0 8px 26px rgba(179,45,107,0.12);
+  transition: transform 140ms, box-shadow 140ms;
+}
+.btn:hover { transform: translateY(-3px); }
+.btn.ghost {
+  background: rgba(255,255,255,0.14);
+  color: #6b2a4a;
+  border: 1px solid rgba(179,45,107,0.06);
+  box-shadow: none;
+}
+
+/* Highlight temporal */
+.place.is-highlighted { box-shadow: 0 30px 90px rgba(179,45,107,0.12); transform: translateY(-6px); }
+
+/* Modal ampliado */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1400;
+  padding: 24px;
+}
+.modal.is-open { display: flex; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(20,8,12,0.45); backdrop-filter: blur(4px); }
+.modal-content {
+  position: relative;
+  max-width: 920px;
+  width: 100%;
+  background: linear-gradient(180deg,#fff8fb,#fff0f6);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 30px 80px rgba(120,60,100,0.16);
+  z-index: 2;
+}
+.modal-img { max-width:100%; height:auto; border-radius:12px; box-shadow:0 18px 48px rgba(120,60,100,0.08); }
+.modal-close { position: absolute; top:12px; right:12px; background: linear-gradient(180deg,#ff8fbf,#d94b86); color: white; padding: 8px 10px; border-radius: 8px; }
+
+/* Reveal animations */
+.fade-in-up { opacity: 0; transform: translateY(10px); transition: opacity 420ms ease, transform 420ms ease; }
+.fade-in-up.is-visible { opacity: 1; transform: translateY(0); }
+
+/* Footer (copiado del original) */
+.site-footer {
+  margin-top:36px;
+  padding:20px 16px;
+  background:linear-gradient(180deg,#fff4f8,#fff0f6);
+  border-top:1px solid rgba(179,45,107,0.04);
+}
+.footer-inner { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.footer-left strong { color:#b32d6b; font-size:18px; display:block; }
+.footer-left p { color:#6b3a4a; opacity:0.9; }
+.footer-right p { color:#5a3141; }
+
+/* --- Responsive mejorado para fichas --- */
+
+/* Escritorio ancho >= 1400px: imagen más grande en columna izquierda */
+@media (min-width: 1400px) {
+  .place { grid-template-columns: 420px 1fr; gap: 28px; padding: 18px; border-radius: 18px; }
+  .place-media { min-height: 320px; border-radius: 16px; }
+  .place-caption strong { font-size:20px; }
+}
+
+/* Escritorio / laptops 1000px - 1399px */
+@media (min-width: 1000px) and (max-width: 1399px) {
+  .place { grid-template-columns: 360px 1fr; gap: 22px; padding: 16px; }
+  .place-media { min-height: 280px; }
+}
+
+/* Tablets 720px - 999px : dos columnas si el viewport lo permite (imagen arriba en cada ficha) */
+@media (min-width: 720px) and (max-width: 999px) {
+  .places { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .place { grid-template-columns: 1fr; }
+  .place-media { min-height: 220px; border-radius: 14px; }
+  .place { padding: 12px; }
+}
+
+/* Móviles 520px - 719px : 1 columna, imagen arriba, espacio amplio */
+@media (min-width: 520px) and (max-width: 719px) {
+  .places { grid-template-columns: 1fr; gap: 16px; margin: 18px 12px; }
+  .place { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+  .place-media { min-height: 240px; border-radius: 14px; }
+  .place-caption { left: 10px; bottom: 10px; }
+}
+
+/* Pequeños <= 519px : diseño vertical compacto y botones más grandes */
+@media (max-width: 519px) {
+  main.container { padding-top: 84px; }
+  .places { gap: 14px; margin: 16px 10px; }
+  .place { grid-template-columns: 1fr; gap: 10px; padding: 10px; border-radius: 12px; }
+  .place-media { min-height: 200px; border-radius: 12px; }
+  .place-caption strong { font-size:16px; }
+  .place-text { font-size: 14px; }
+  .btn { padding: 10px 12px; min-height: 44px; }
+  .modal-content { padding: 14px; max-width: 94%; }
+  .modal-close { top: 10px; right: 10px; padding: 6px 8px; }
+}
+
+/* Muy pequeños <= 380px : compactar aún más */
+@media (max-width: 380px) {
+  .place-media { min-height: 170px; }
+  .place-caption strong { font-size:15px; }
+  .place-text { font-size:13px; line-height:1.45; }
+  .btn { padding: 8px 10px; font-size: 13px; }
+  header.nav { height: 64px; padding: 8px 10px; }
+  nav ul { gap: 8px; font-size: 13px; }
+}
+
+/* Ajustes para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .place-media img { transition: none !important; transform: none !important; }
+  .btn { min-height: 48px; padding: 10px 14px; }
+}
+
+/* Preferencia de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .place, .place-media img, .modal, .fade-in-up { transition: none !important; animation: none !important; }
+}
+
+/* Accesibilidad y foco visible */
+a:focus, button:focus { outline: 3px solid rgba(179,45,107,0.14); outline-offset: 3px; }

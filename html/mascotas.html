@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mascotas - Remolacha❤️‍🩹</title>
+  <link rel="stylesheet" href="../css/musica.css">
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="logo" aria-hidden="false">
+      <div class="heart" aria-hidden="true">♥</div>
+      Remolacha
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../html/extra 1.html">Mas de ti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="main">
+    <section class="gallery-intro" aria-labelledby="gallery-title" style="margin: 20px 16px;">
+      <h1 id="gallery-title" class="page-title">Mascotas</h1>
+      <p class="lead">
+Animalitos que rodean la vida de Xaviera y forman parte de su vida</p>
+    </section>
+
+    <section class="places" id="places" aria-label="Listado de lugares">
+      <!-- Lugar 1 -->
+      <article class="place fade-in-up" data-stagger="0" tabindex="0" role="group" aria-labelledby="place-1-title">
+        <figure class="place-media">
+          <img src="../img/chucho.jpg" loading="lazy">
+
+        </figure>
+        <div class="place-body">
+
+          <p class="place-text">
+Chucho (Gato Naranja)
+<br>
+<br>
+Personalidad y comportamiento
+Cariñosos y sociables: Se les suele describir como más afectuosos y extrovertidos que otros gatos, aunque esto puede variar según el individuo.
+<br>
+<br>
+Curiosos y juguetones: Tienen fama de ser activos, exploradores y algo traviesos.
+<br>
+<br>
+Inteligentes y expresivos: Muchos dueños reportan que sus gatos naranjas son muy comunicativos y aprenden rápido.
+        </p>
+
+        </div>
+      </article>
+
+      <!-- Lugar 2 -->
+      <article class="place fade-in-up" data-stagger="1" tabindex="0" role="group" aria-labelledby="place-2-title">
+        <figure class="place-media">
+          <img src="../img/Yunna.jpg" alt="Café y conversación con risas compartidas" loading="lazy">
+          <figcaption class="place-caption">
+
+        </figure>
+        <div class="place-body">
+          <p class="place-text">
+
+            Yunna (Gata Negra)
+<br>
+<br>          
+Personalidad y comportamiento
+Inteligentes y adaptables: Son muy perceptivos y aprenden rápido. Se adaptan bien a distintos entornos.
+<br>
+<br>
+Cariñosos y sociables: Aunque se les ha asociado con la independencia, muchos gatos negros son afectuosos y disfrutan del contacto humano.
+<br>
+<br>
+Tolerantes con otras mascotas: Estudios sugieren que pueden ser más receptivos y menos agresivos que otros gatos</p>
+
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>Remolacha</strong>
+        <p>Hecho con cariño para ti.</p>
+      </div>
+      <div class="footer-right">
+        <p>© <span id="year"></span> -Theito- Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-action="close"></div>
+    <div class="modal-content" role="document" aria-labelledby="modal-title">
+      <button class="modal-close btn" data-action="close" aria-label="Cerrar vista ampliada">Cerrar</button>
+      <h3 id="modal-title" class="modal-title"></h3>
+      <figure style="margin:12px 0 0 0;">
+        <img id="modal-img" src="" alt="" class="modal-img">
+      </figure>
+      <p id="modal-desc" class="modal-desc"></p>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const places = Array.from(document.querySelectorAll('.place'));
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDesc = document.getElementById('modal-desc');
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+      function openModal(src, title, desc, alt) {
+        modalImg.src = src;
+        modalImg.alt = alt || '';
+        modalTitle.textContent = title || '';
+        modalDesc.textContent = desc || '';
+        modal.setAttribute('aria-hidden','false');
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        modal.querySelector('.modal-close').focus();
+      }
+      function closeModal() {
+        modal.setAttribute('aria-hidden','true');
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      places.forEach((place, i) => {
+        const view = place.querySelector('.btn.view');
+        const focusBtn = place.querySelector('.btn.ghost');
+        view && view.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(view.dataset.src, view.dataset.title, view.dataset.desc, place.querySelector('img').alt);
+        });
+
+        focusBtn && focusBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          place.scrollIntoView({behavior:'smooth', block:'center'});
+          place.classList.add('is-highlighted');
+          setTimeout(()=> place.classList.remove('is-highlighted'), 900);
+        });
+
+        place.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const img = place.querySelector('img');
+            openModal(img.src, place.querySelector('figcaption strong').textContent, place.querySelector('.place-text').textContent, img.alt);
+          }
+          if(e.key === 'ArrowDown') {
+            const next = places[(i+1) % places.length];
+            next.focus();
+          }
+          if(e.key === 'ArrowUp') {
+            const prev = places[(i-1 + places.length) % places.length];
+            prev.focus();
+          }
+          if(e.key === 'Escape') closeModal();
+        });
+      });
+
+      modal.addEventListener('click', (e) => {
+        if(e.target.dataset && e.target.dataset.action === 'close') closeModal();
+        if(e.target.classList.contains('modal-backdrop')) closeModal();
+      });
+      modal.querySelectorAll('[data-action="close"]').forEach(b => b.addEventListener('click', closeModal));
+      document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+      if(window.revealElementNow) {
+        document.querySelectorAll('.fade-in-up').forEach((el, idx) => window.revealElementNow(el, idx * 60));
+      } else {
+        document.querySelectorAll('.fade-in-up').forEach((el, idx) => setTimeout(()=> el.classList.add('is-visible'), idx * 80));
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+/* style.css - CSS actualizado para la página "Romántica" */
+
+/* Reset ligero */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color: #3b2b2b; background: linear-gradient(180deg,#fff7fb 0%, #fff0f6 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+/* Navegación fija superior */
+header.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  z-index: 1200;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,105,180,0.08);
+  transition: box-shadow 220ms ease, transform 220ms ease, background 220ms ease;
+}
+header.nav.scrolled { box-shadow: 0 8px 30px rgba(120,60,100,0.08); background: rgba(255, 255, 255, 0.92); }
+
+.logo { display:flex; align-items:center; gap:10px; font-weight:700; color:#b32d6b; font-size:20px; user-select:none; }
+.logo .heart {
+  width:36px; height:36px; display:inline-grid; place-items:center;
+  background: linear-gradient(135deg,#ffb3d1,#ff6fa3);
+  color:white; border-radius:50%; font-size:18px; box-shadow:0 6px 18px rgba(255,105,180,0.18);
+}
+
+/* Navegación interna */
+nav ul { list-style:none; display:flex; gap:18px; align-items:center; }
+nav a { text-decoration:none; color:#6b2a4a; padding:8px 12px; border-radius:10px; font-weight:600; transition: background 150ms, color 150ms; }
+nav a:hover, nav a:focus { background: rgba(179,45,107,0.08); color:#a21f57; outline: none; }
+
+/* Contenedor principal */
+main.container { padding-top: 92px; max-width: 1100px; margin: 0 auto; }
+
+/* Carrusel */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  margin: 28px 16px;
+  border-radius: 18px;
+  box-shadow: 0 22px 60px rgba(179,45,107,0.08);
+  background: linear-gradient(180deg, rgba(255,245,249,0.75), rgba(255,238,244,0.6));
+}
+.slides { display: flex; transition: transform 600ms cubic-bezier(.2,.9,.2,1); will-change: transform; }
+.slide { width: 100%; flex: 0 0 100%; padding: 36px; display: flex; align-items: center; justify-content:center; gap: 28px; }
+.content { display:flex; align-items:center; gap: 26px; width:100%; justify-content:space-between; }
+
+/* Imagen y bloque */
+.img-blob {
+  flex: 0 0 48%;
+  max-width: 560px;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 12px 36px rgba(179,45,107,0.08);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: linear-gradient(135deg,#fff0f6, #fff8fb);
+}
+.slide-img { width:100%; height:100%; object-fit: cover; display:block; transform-origin:center; transition: transform 600ms ease; }
+.slide:hover .slide-img { transform: scale(1.04); }
+
+/* Texto del slide */
+.text { flex:1; padding: 8px 18px; }
+.text h2 { font-size:28px; color:#7a2a53; margin-bottom:8px; letter-spacing:0.2px; }
+.text p { color:#512b3e; line-height:1.5; opacity:0.95; }
+
+/* Flechas */
+.arrow {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  border:0;
+  background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,240,245,0.95));
+  color:#b32d6b;
+  font-size:26px;
+  cursor:pointer;
+  box-shadow:0 8px 22px rgba(123,45,89,0.08);
+  transition:transform 140ms, box-shadow 140ms;
+}
+.arrow:hover { transform:translateY(-50%) scale(1.06); box-shadow:0 12px 28px rgba(123,45,89,0.12); }
+.arrow.left { left:14px; }
+.arrow.right { right:14px; }
+
+/* Indicadores */
+.indicators {
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:14px;
+  display:flex;
+  gap:8px;
+}
+.dot {
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#ffd9e9;
+  border: 2px solid rgba(179,45,107,0.08);
+  cursor:pointer;
+  transition: transform 160ms, background 160ms;
+}
+.dot.active { background: linear-gradient(180deg,#ffb3d1,#ff6fa3); transform: scale(1.18); box-shadow:0 6px 18px rgba(179,45,107,0.12); }
+
+/* Espacio extenso para información */
+.info {
+  background: rgba(255,255,255,0.6);
+  margin: 28px 16px;
+  padding: 28px;
+  border-radius:14px;
+  box-shadow: 0 18px 48px rgba(120,60,100,0.04);
+}
+.info h3 { font-size:22px; color:#9d2e67; margin-bottom:12px; }
+.info p { color:#4b2b3a; line-height:1.6; margin-bottom:18px; }
+.long-text h4 { margin-top:12px; font-size:18px; color:#7a2a53; margin-bottom:8px; }
+.long-text p { margin-bottom:12px; color:#533040; }
+
+/* Footer */
+.site-footer {
+  margin-top:36px;
+  padding:20px 16px;
+  background:linear-gradient(180deg,#fff4f8,#fff0f6);
+  border-top:1px solid rgba(179,45,107,0.04);
+}
+.footer-inner { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.footer-left strong { color:#b32d6b; font-size:18px; display:block; }
+.footer-left p { color:#6b3a4a; opacity:0.9; }
+.footer-right p { color:#5a3141; }
+
+
+
+/* Responsivo actualizado */
+
+/* Tablets y pantallas medianas (<= 900px) */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* Cada slide ocupa exactamente 100% del contenedor slides */
+  .slide {
+    padding: 20px;
+    flex: 0 0 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .img-blob {
+    width: 100%;
+    max-width: none;
+    height: 320px;
+    border-radius: 16px;
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+
+  .text {
+    width: 100%;
+    padding: 8px 4px;
+    text-align: center;
+  }
+
+  .text h2 { font-size: 22px; }
+  .text p { font-size: 15px; line-height: 1.5; }
+  
+  .arrow.left { left: 10px; }
+  .arrow.right { right: 10px; }
+
+  .dot { width: 14px; height: 14px; }
+}
+
+/* Móviles (<= 520px) */
+@media (max-width: 520px) {
+  header.nav { padding: 10px 12px; height: 64px; }
+  nav ul { gap: 10px; font-size: 14px; }
+
+  .slide {
+    padding: 12px;
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+  }
+
+  .img-blob {
+    width: 100%;
+    max-width: none;
+    height: 220px;
+    border-radius: 14px;
+    box-shadow: 0 10px 28px rgba(120,60,100,0.06);
+  }
+
+  .slide-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .text {
+    width: 100%;
+    padding: 8px 6px;
+    text-align: center;
+  }
+
+  .text h2 { font-size: 18px; line-height: 1.15; margin-bottom: 6px; }
+  .text p { font-size: 14px; line-height: 1.45; margin: 0; color: #512b3e; }
+
+  .arrow { width: 40px; height: 40px; font-size: 20px; }
+  .arrow.left { left: 8px; }
+  .arrow.right { right: 8px; }
+
+  .indicators { bottom: 10px; gap: 10px; }
+  .dot { width: 12px; height: 12px; }
+
+  /* Truncado seguro para títulos largos en móviles (2 líneas) */
+.text h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;           /* propiedad estándar añadida */
+  -webkit-box-orient: vertical;
+  box-orient: vertical;    /* soporte adicional si se implementa */
+  overflow: hidden;
+}
+
+
+  /* Reducir hover effects en touch */
+  @media (hover: none) and (pointer: coarse) {
+    .slide:hover .slide-img { transform: none; }
+  }
+}
+
+/* Pantallas muy pequeñas (<= 360px) */
+@media (max-width: 360px) {
+  .text p { font-size: 13px; }
+  .logo { font-size: 18px; }
+  .logo .heart { width: 32px; height: 32px; font-size: 16px; }
+  .arrow { width: 36px; height: 36px; font-size: 18px; }
+}
+
+/* Accesibilidad y foco visible */
+a:focus, button:focus { outline: 3px solid rgba(179,45,107,0.14); outline-offset: 3px; }
+
+/* Ajuste para cuando JS añade estilos en línea */
+.slides[style] { will-change: transform; }

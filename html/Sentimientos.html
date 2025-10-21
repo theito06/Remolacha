@@ -1,0 +1,842 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sentimientos - Remolacha❤️‍🩹</title>
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="logo" aria-hidden="false">
+      <div class="heart" aria-hidden="true">♥</div>
+      Remolacha
+    </div>
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../html/extra 1.html">Mas de ti</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- Espacio extenso para información -->
+    <section id="info" class="info">
+      <h3>Sentimientos</h3>
+      <p>
+Lo que deseo y siento por ella
+ </p>
+
+      
+      <article class="long-text">
+        <h4>Sentimientos en el aire</h4>
+
+        <p>
+            Xaviera tiene 20 años, es una mujer muy linda, vive con sus padres y tiene un hermano, lo poco que se de ella es que, se arregla aunque no es fan del maquillaje, le gustan las canciones de Olivia Rodrigo, Sabrina, José José, entre otros.
+
+        </p>
+        <p>
+            Para mi es una linda mujer, en aspecto fisico como humano, me encanta siempre que la veo con un vestido ajustado negro, de verdad para mi se ve hermosa incluso hasta sexi, también cuando anda un enterizo celeste, se ve muy femenina y me encanta. También me gusta sus lindas manos y sus pies, lo bonita que son sus uñas, me gusta cuando me lleva de la mano, me siento seguro.
+            <br>
+            <br>
+            Ademas sabe tratar bonito, recuerdo cuando estaba yo su servidor en publish y de la nada ella llego y me dejo un refrigerio, cuando pienso en eso me dan ganas de llorar, se veia tan linda, nadie habia hecho algo similar por mi, lo mas normal es que el hombre sea siempre sea el que de, pero ella es diferente, su forma de querer toca hasta mi alma y me hace sentir especial, ella sabe querer.
+<br>
+<br>
+El domingo 12 de octubre que sali con ella en el crucero, tengo grabado ese día, puede contemplar la belleza de lo que me rodea, el mundo es tan grandioso, ver a Xaviera y la linda creación de Dios es una combinación de maravillas que deslumbrarón mi ser, tengo grabado en mi piel lo bien que se sentian sus abrazos, lo calido de sus besos, y como me transmitia el momento unico en que nos mostrabamos afecto, si me preguntan, desearia que esa tarde fuera eterna, porque cada segundo que pasaba con ella eran mil años de vida para mi.
+<br>
+<br>     
+De verdad deseo que a ella siempre le vaya bien en todo lo que haga, que Dios la guarde y la cuide donde quiera que vaya, no solo a ella, también a su familia. Yo la quiero mucho, siento que la amo, deseo que su sonrisa sea para siempre, que sus carcajadas nunca se acaben, que su buena voluntad nunca desaparzca y asi como me siento feliz a su lado, la demas gente que la rodea se pueda sentir igual de feliz.
+Puede que suene egoista pero quisiera que ella pueda estar a mi lado siempre, aunque a veces tenga miedo que ella sea la razón de ser valiente, porque con tan solo su existencia es motivación para mi, por eso me gusta dar el 100% de mi cada vez que hago algo, porque pienso que porque la quiero debo hacer todo bien.
+<br>
+<br>
+Xaviera significas mucho para mi, me encantas, no hay mejor mujer que tu y nunca lo habra, eres la luz que ilumina todo, en especial mi vida.
+</p>
+
+
+
+      </article>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contacto">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <strong>Remolacha</strong>
+        <p>Hecho con cariño para ti.</p>
+      </div>
+      <div class="footer-right">
+        <p>© <span id="year"></span> -Theito- Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript inline (scripts dentro del HTML) -->
+  <script>
+    (function(){
+      // Referencias DOM
+      const slidesEl = document.getElementById('slides');
+      let slides = Array.from(document.querySelectorAll('.slide'));
+      const prevBtn = document.getElementById('prev');
+      const nextBtn = document.getElementById('next');
+      const indicatorsEl = document.getElementById('indicators');
+      let dots = Array.from(indicatorsEl ? indicatorsEl.querySelectorAll('.dot') : []);
+      let index = 0;
+      const intervalMs = 5000; // 5 segundos
+      let timer = null;
+      let isHovering = false;
+
+      // Recalcula total dinámicamente
+      function totalSlides() { return slides.length; }
+
+      // Asegura que el contenedor y cada slide tengan los estilos inline necesarios
+      function updateSlidesWidth() {
+        const total = totalSlides();
+        slidesEl.style.width = (100 * total) + '%';
+        slides.forEach((s) => {
+          s.style.flex = '0 0 ' + (100 / total) + '%';
+          s.style.maxWidth = (100 / total) + '%';
+        });
+      }
+
+      // Mueve al slide i
+      function goTo(i, animate = true) {
+        const total = totalSlides();
+        if(total === 0) return;
+        index = ((i % total) + total) % total;
+        if(!animate) {
+          slidesEl.style.transition = 'none';
+        } else {
+          slidesEl.style.transition = '';
+        }
+        // mover según porcentaje relativo (cada slide ocupa 100/total % de slidesEl)
+        const shift = (index * (100 / total));
+        slidesEl.style.transform = 'translateX(-' + shift + '%)';
+        updateDots();
+        // accesibilidad
+        slides.forEach((s, idx) => {
+          s.setAttribute('aria-hidden', idx === index ? 'false' : 'true');
+        });
+      }
+
+      function next() { goTo(index + 1); }
+      function prev() { goTo(index - 1); }
+
+      function updateDots() {
+        dots.forEach(d => d.classList.remove('active'));
+        if(dots[index]) dots[index].classList.add('active');
+        // mantener data-index actualizado en caso de cambios
+        dots.forEach((d, i) => d.dataset.index = i);
+      }
+
+      // Temporizador autoplay con pausa en hover / focus
+      function startTimer() {
+        stopTimer();
+        timer = setInterval(() => { if(!isHovering) next(); }, intervalMs);
+      }
+      function stopTimer() {
+        if(timer) { clearInterval(timer); timer = null; }
+      }
+
+      // Eventos botones e indicadores
+      function attachEvents() {
+        if(nextBtn) nextBtn.addEventListener('click', () => { next(); startTimer(); });
+        if(prevBtn) prevBtn.addEventListener('click', () => { prev(); startTimer(); });
+
+        // indicadores (dots)
+        dots.forEach(d => {
+          d.addEventListener('click', (e) => {
+            const i = Number(e.currentTarget.dataset.index);
+            goTo(i);
+            startTimer();
+          });
+        });
+
+        // pausa autoplay en hover/focus
+        const carousel = document.querySelector('.carousel');
+        if(carousel) {
+          carousel.addEventListener('mouseenter', () => { isHovering = true; });
+          carousel.addEventListener('mouseleave', () => { isHovering = false; });
+          carousel.addEventListener('focusin', () => { isHovering = true; });
+          carousel.addEventListener('focusout', () => { isHovering = false; });
+        }
+
+        // swipe táctil básico
+        (function addSwipe() {
+          const carouselEl = document.querySelector('.carousel');
+          if(!carouselEl) return;
+          let startX = 0;
+          let deltaX = 0;
+          const threshold = 50;
+          carouselEl.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            deltaX = 0;
+            isHovering = true;
+          }, {passive: true});
+          carouselEl.addEventListener('touchmove', (e) => {
+            deltaX = e.touches[0].clientX - startX;
+          }, {passive: true});
+          carouselEl.addEventListener('touchend', () => {
+            isHovering = false;
+            if(Math.abs(deltaX) > threshold) {
+              if(deltaX > 0) prev(); else next();
+              startTimer();
+            }
+          });
+        })();
+
+        // accesibilidad: flechas del teclado
+        document.addEventListener('keydown', (e) => {
+          if(e.key === 'ArrowLeft') { prev(); startTimer(); }
+          if(e.key === 'ArrowRight') { next(); startTimer(); }
+        });
+      }
+
+      // Inicialización completa (y después de añadir/eliminar slides)
+      function initCarousel() {
+        slides = Array.from(document.querySelectorAll('.slide'));
+        // si no hay indicadores o su número no coincide, rehacerlos
+        let shouldRebuildDots = false;
+        if(!indicatorsEl) {
+          shouldRebuildDots = true;
+        } else {
+          const existing = Array.from(indicatorsEl.querySelectorAll('.dot'));
+          if(existing.length !== slides.length) shouldRebuildDots = true;
+        }
+        if(shouldRebuildDots) rebuildIndicators();
+        dots = Array.from(document.querySelectorAll('.dot'));
+        updateSlidesWidth();
+        attachEvents();
+        goTo(0, false);
+        startTimer();
+      }
+
+      // Reconstruir indicadores desde cero para sincronizar con slides
+      function rebuildIndicators() {
+        if(!indicatorsEl) return;
+        indicatorsEl.innerHTML = '';
+        slides.forEach((s, i) => {
+          const btn = document.createElement('button');
+          btn.className = 'dot' + (i === 0 ? ' active' : '');
+          btn.dataset.index = i;
+          btn.setAttribute('aria-label', 'Ir a slide ' + (i + 1));
+          indicatorsEl.appendChild(btn);
+        });
+      }
+
+      // API pública simple para añadir slides dinámicamente
+      window.romanticaCarousel = {
+        addSlide: function({imgSrc, imgAlt, title = '', text = ''}) {
+          const slide = document.createElement('div');
+          slide.className = 'slide';
+          const idx = totalSlides();
+          slide.setAttribute('role','group');
+          slide.setAttribute('aria-roledescription','slide');
+          slide.setAttribute('aria-label','Slide ' + (idx + 1));
+          slide.innerHTML = `
+            <div class="content">
+              <div class="img-blob">
+                <img class="slide-img" src="${escapeHtml(imgSrc)}" alt="${escapeHtml(imgAlt || '')}" loading="lazy">
+              </div>
+              <div class="text">
+                <h2>${escapeHtml(title)}</h2>
+                <p>${escapeHtml(text)}</p>
+              </div>
+            </div>
+          `;
+          slidesEl.appendChild(slide);
+          // re-inicializar estructura
+          initCarousel();
+        },
+        goTo: function(i) { goTo(i); },
+        next: next,
+        prev: prev,
+        stop: stopTimer,
+        play: startTimer
+      };
+
+      // escapeHtml para seguridad al insertar strings
+      function escapeHtml(str) {
+        if(!str) return '';
+        return String(str).replace(/[&<>"']/g, function(m) {
+          return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
+        });
+      }
+
+      // Año dinámico en footer
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+      // Ejecutar init
+      initCarousel();
+
+      (function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();(function(){
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const STAGGER_MS = 80;
+
+  // Si el usuario prefiere reducir movimiento, marcar todo visible y salir
+  if (prefersReduced) {
+    document.querySelectorAll('.fade-in-up').forEach(el => el.classList.add('is-visible'));
+    return;
+  }
+
+  // Observer para elementos que no están en vista al cargar
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  // Revelado inmediato con stagger para elementos visibles en carga
+  function revealOnLoad() {
+    const els = Array.from(document.querySelectorAll('.fade-in-up'));
+    els.forEach((el, i) => {
+      const rect = el.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      const data = el.getAttribute('data-stagger');
+      const idx = (data !== null) ? Number(data) : i;
+      const delay = Math.max(0, Math.min(8, idx)) * STAGGER_MS;
+
+      if (inViewport) {
+        // usar rAF + timeout para asegurar la transición sea visible
+        requestAnimationFrame(() => {
+          setTimeout(() => el.classList.add('is-visible'), delay);
+        });
+      } else {
+        io.observe(el);
+      }
+    });
+  }
+
+  // Ejecutar en carga completa del DOM
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', revealOnLoad);
+  } else {
+    revealOnLoad();
+  }
+
+  // API: permitir revelar manualmente
+  window.revealElementNow = function(selectorOrEl, delay = 0) {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (!el) return;
+    setTimeout(() => el.classList.add('is-visible'), delay);
+    try { io.unobserve(el); } catch(e){}
+  };
+})();
+
+      // Recalcular layout al cambiar tamaño de ventana (evita glitches)
+      let resizeTimeout = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          updateSlidesWidth();
+          goTo(index, false);
+        }, 120);
+      });
+    })();
+  </script>
+</body>
+</html>
+```
